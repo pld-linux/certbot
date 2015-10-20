@@ -14,7 +14,6 @@ Group:		Libraries/Python
 Source0:	https://github.com/letsencrypt/letsencrypt/archive/v%{version}.dev20151017.tar.gz
 # Source0-md5:	1cac8a454e466136f70834c76977ef17
 URL:		https://letsencrypt.org/
-BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
