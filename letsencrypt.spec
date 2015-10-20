@@ -4,14 +4,15 @@
 %bcond_without	doc		# don't build doc
 %bcond_without	tests	# do not perform "make test"
 
-%define	snap	20151017
+%define		rel	1
+%define		subver	20151017
 Summary:	Let's Encrypt client
 Name:		letsencrypt
 Version:	0.0.0
-Release:	0.%{snap}.1
+Release:	0.%{subver}.%{rel}
 License:	APL 2.0
-Group:		Libraries/Python
-Source0:	https://github.com/letsencrypt/letsencrypt/archive/v%{version}.dev20151017.tar.gz
+Group:		Applications/Networking
+Source0:	https://github.com/letsencrypt/letsencrypt/archive/v%{version}.dev%{subver}.tar.gz
 # Source0-md5:	1cac8a454e466136f70834c76977ef17
 URL:		https://letsencrypt.org/
 BuildRequires:	python-modules
@@ -42,7 +43,7 @@ interoperate with the Let's Encrypt CA which will be issuing
 browser-trusted certificates for free.
 
 %prep
-%setup -q -n %{name}-%{version}.dev%{snap}
+%setup -q -n %{name}-%{version}.dev%{subver}
 
 %build
 %{__python} setup.py build %{?with_tests:test}
@@ -50,12 +51,11 @@ browser-trusted certificates for free.
 %if %{with doc}
 cd docs
 %{__make} -j1 html
-rm -rf _build/html/_sources
+rm -r _build/html/_sources
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__python} setup.py \
 	build \
 	install --skip-build \
@@ -71,4 +71,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/letsencrypt
 %attr(755,root,root) %{_bindir}/letsencrypt-renewer
 %{py_sitescriptdir}/letsencrypt
-%{py_sitescriptdir}/letsencrypt-*py*.egg-info
+%{py_sitescriptdir}/letsencrypt-%{version}*-py*.egg-info
