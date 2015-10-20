@@ -62,6 +62,12 @@ rm -rf $RPM_BUILD_ROOT
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
+%py_postclean
+
+# don't package tests
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/letsencrypt/tests
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/letsencrypt/plugins/*_test.py*
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
