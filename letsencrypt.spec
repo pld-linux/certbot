@@ -4,16 +4,14 @@
 %bcond_without	doc		# don't build doc
 %bcond_without	tests	# do not perform "make test"
 
-%define		rel	1
-%define		subver	20151017
 Summary:	Let's Encrypt client
 Name:		letsencrypt
-Version:	0.0.0
-Release:	0.%{subver}.%{rel}
+Version:	0.1.0
+Release:	0.1
 License:	APL 2.0
 Group:		Applications/Networking
-Source0:	https://github.com/letsencrypt/letsencrypt/archive/v%{version}.dev%{subver}.tar.gz
-# Source0-md5:	1cac8a454e466136f70834c76977ef17
+Source0:	https://github.com/letsencrypt/letsencrypt/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	eb1208bcf5c33a6f030da9419718bf6b
 URL:		https://letsencrypt.org/
 BuildRequires:	python-modules
 BuildRequires:	python-setuptools
@@ -43,7 +41,7 @@ interoperate with the Let's Encrypt CA which will be issuing
 browser-trusted certificates for free.
 
 %prep
-%setup -q -n %{name}-%{version}.dev%{subver}
+%setup -q
 
 %build
 %{__python} setup.py build %{?with_tests:test}
