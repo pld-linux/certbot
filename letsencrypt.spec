@@ -16,7 +16,7 @@ URL:		https://letsencrypt.org/
 BuildRequires:	python-modules
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.612
+BuildRequires:	rpmbuild(macros) >= 1.713
 %if %{with tests}
 BuildRequires:	python-mock
 BuildRequires:	python-pythondialog
@@ -44,7 +44,9 @@ browser-trusted certificates for free.
 %setup -q
 
 %build
-%{__python} setup.py build %{?with_tests:test}
+%if %{with python2}
+%py_build %{?with_tests:test}
+%endif
 
 %if %{with doc}
 cd docs
@@ -54,12 +56,7 @@ rm -r _build/html/_sources
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py \
-	build \
-	install --skip-build \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
-
+%py_install
 %py_postclean
 
 # don't package tests
