@@ -18,10 +18,10 @@ BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.713
 %if %{with tests}
+BuildRequires:	Zope-Component
+BuildRequires:	Zope-Interface
 BuildRequires:	python-mock
 BuildRequires:	python-pythondialog
-BuildRequires:	python-zope.component
-BuildRequires:	python-zope.interface
 %endif
 %if %{with doc}
 BuildRequires:	python-repoze.sphinx.autointerfac
