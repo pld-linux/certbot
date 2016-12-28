@@ -9,7 +9,7 @@ Summary:	Certbot -  EFF's tool to obtain certs from Let's Encrypt
 Name:		certbot
 Version:	0.9.3
 Release:	1
-License:	APL 2.0
+License:	Apache v2.0
 Group:		Applications/Networking
 Source0:	https://github.com/certbot/certbot/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	23920103accbed8adc6e7e30b14581e2
@@ -45,7 +45,6 @@ EFF, Mozilla, and others - and deploys it to a web server.
 
 %package -n python-acme
 Summary:	Python library for the ACME protocol
-License:	Apache v2.0
 Group:		Libraries/Python
 Obsoletes:	python-acme-doc < 0.9.3
 
