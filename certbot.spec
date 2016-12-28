@@ -91,7 +91,6 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},/var/log,/var/lib}/letsencrypt
 
 %py_install
@@ -120,9 +119,9 @@ rm -rf $RPM_BUILD_ROOT
 %else
 %doc docs/*.rst docs/api docs/man
 %endif
-%{_sysconfdir}/letsencrypt
-/var/log/letsencrypt
-/var/lib/letsencrypt
+%dir %{_sysconfdir}/letsencrypt
+%dir /var/log/letsencrypt
+%dir /var/lib/letsencrypt
 %attr(755,root,root) %{_bindir}/certbot
 %{py_sitescriptdir}/certbot
 %{py_sitescriptdir}/certbot-%{version}*-py*.egg-info
