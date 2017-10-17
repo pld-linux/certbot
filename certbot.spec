@@ -1,4 +1,7 @@
-# TODO: finish, test
+# TODO: 
+# - Fix:
+# 	An unexpected error occurred:
+#	ComponentLookupError: (<InterfaceClass certbot.interfaces.IDisplay>, '')
 #
 # Conditional build:
 %bcond_with	doc		# build doc
@@ -7,12 +10,12 @@
 
 Summary:	Certbot -  EFF's tool to obtain certs from Let's Encrypt
 Name:		certbot
-Version:	0.11.1
-Release:	1
+Version:	0.19.0
+Release:	0.1
 License:	Apache v2.0
 Group:		Applications/Networking
 Source0:	https://github.com/certbot/certbot/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fcc550a95ff121cecaa315266d2bd754
+# Source0-md5:	3eeaceb7fe5b514807d8b7f4af57edc1
 URL:		https://certbot.eff.org/
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
