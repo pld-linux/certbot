@@ -1,7 +1,3 @@
-# TODO: 
-# - Fix:
-# 	An unexpected error occurred:
-#	ComponentLookupError: (<InterfaceClass certbot.interfaces.IDisplay>, '')
 #
 # Conditional build:
 %bcond_with	doc		# build doc
@@ -10,12 +6,12 @@
 
 Summary:	Certbot -  EFF's tool to obtain certs from Let's Encrypt
 Name:		certbot
-Version:	0.19.0
-Release:	0.1
+Version:	0.24.0
+Release:	1
 License:	Apache v2.0
 Group:		Applications/Networking
 Source0:	https://github.com/certbot/certbot/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	3eeaceb7fe5b514807d8b7f4af57edc1
+# Source0-md5:	62717533ca2def2577a7b64954d775fd
 URL:		https://certbot.eff.org/
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
@@ -31,6 +27,9 @@ BuildRequires:	python-six
 %endif
 %if %{with python3}
 BuildRequires:	python3-setuptools
+Requires:	python3-zope.component >= 4.4.1
+%else:
+Requires:	python-zope.component >= 4.4.1
 %endif
 Obsoletes:	letsencrypt
 BuildArch:	noarch
@@ -95,17 +94,19 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},/var/log,/var/lib}/letsencrypt
 
+%if %{with python3}
+%py3_install
+%else
 %py_install
+%endif
 
 cd acme
 
-# python3 first, to have Python 2 /usr/bin/jws
+%py_install
+
 %if %{with python3}
 %py3_install
 %endif
-
-%py_install
-
 cd ..
 
 %py_postclean
@@ -115,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {CHANGES,README}.rst CONTRIBUTING.md docs/*.txt
+%doc {CHANGES,README}.rst CONTRIBUTING.md docs/*.txt docs/*.rst
 %if %{with doc}
 %doc docs/_build/html/*
 %else
@@ -125,8 +126,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/log/letsencrypt
 %dir /var/lib/letsencrypt
 %attr(755,root,root) %{_bindir}/certbot
+%if %{with python3}
+%{py3_sitescriptdir}/certbot
+%{py3_sitescriptdir}/certbot-%{version}*-py*.egg-info
+%else
 %{py_sitescriptdir}/certbot
 %{py_sitescriptdir}/certbot-%{version}*-py*.egg-info
+%endif
 
 %files -n python-acme
 %defattr(644,root,root,755)
@@ -136,7 +142,6 @@ rm -rf $RPM_BUILD_ROOT
 %else
 %doc acme/docs/*.rst acme/docs/api acme/docs/man
 %endif
-%attr(755,root,root) %{_bindir}/jws
 %{py_sitescriptdir}/acme
 %{py_sitescriptdir}/acme-%{version}*-py*.egg-info
 
