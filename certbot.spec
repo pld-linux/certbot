@@ -5,12 +5,12 @@
 
 Summary:	Certbot -  EFF's tool to obtain certs from Let's Encrypt
 Name:		certbot
-Version:	1.27.0
+Version:	1.31.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Networking
 Source0:	https://github.com/certbot/certbot/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	09aaa677ed9d47699c2d575b5a4a147e
+# Source0-md5:	8e1da9cfc9441eebc96224c0a0c43982
 URL:		https://certbot.eff.org/
 BuildRequires:	python3-setuptools
 BuildRequires:	rpm-pythonprov
